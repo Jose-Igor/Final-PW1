@@ -6,6 +6,7 @@ const loginController = require('./src/controllers/loginController');
 const favoritoController = require('./src/controllers/favoritoController');
 
 const { loginRequired } = require('./src/middlewares/middleware');
+const { json } = require('express');
 
 // Rotas da home
 route.get('/', homeController.index);
@@ -25,25 +26,22 @@ route.get('/favorito/delete/:id', loginRequired, favoritoController.delete);
 
 
 // Questão 2 (50 pontos)
-//Implemente uma API REST com as funções CRUD (listar todos, listar por id, criar, apagar e editar) para a entidade favorito descrita na Questão 1.
-// As URLs das rotas da API devem começar por /api, ou seja, rotas diferentes das implemendas na Questão 1, e devem retornar apenas JSON como resposta. 
-//Os métodos HTTP devem ser respeitados para cada uma das funções do CRUD: GET, POST, DELETE, PATCH/PUT. 
-// A API deve funcionar sem erros e com persistência no mesmo BD da Questão 1, e estar acessível pelo Insomnia ou outros clientes HTTP.
+
 
 route.get('/api/listall', (req, res) => {
-    
+    res.send(json.favoritoController.index)
 })
 route.post('/api/criar', (req, res) => {
-    
+    req.get(json.favoritoController.register)
 })
 route.get('/api/list/:id', (req, res) => {
-    
+    res.send(json.favoritoController.editindex)
 })
 route.delete('/api/apagar/:id', (req, res) => {
-    
+    req.destroy(favoritoController.delete)
 })
 route.put('/api/editar/:id', (req, res) => {
-    
+    res.send(json.favoritoController.editindex)
 })
 
 module.exports = route;
