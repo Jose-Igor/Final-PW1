@@ -1,0 +1,38 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Favoritos</h1>
+      <p class="text-center lead">Seus favoritos estão abaixo</p>
+
+      <%- include('includes/messages') %>
+
+      <% if(favoritos.length > 0) { %>
+      <div class="responsive-table">
+        <table class="table my-3">
+          <% favoritos.forEach(favorito => { %>
+            <tr>
+            <td><%= favorito.titulo %></td>
+            <td><%= favorito.link %></td>
+            <td><%= favorito.categoria %></td>
+            <td><a href="/favorito/index/<%= favorito._id %>">Editar</a></td>
+            <td><a class="text-danger" href="/favorito/delete/<%= favorito._id %>">Excluir</a></td>
+          </tr>
+          <% }); %>
+        </table>
+      </div>
+      <% } else { %>
+        <p class="text-center lead">Não existem favoritos.</p>
+      <% } %>
+
+    </div>
+    
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>
